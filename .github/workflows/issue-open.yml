@@ -34,5 +34,3 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GH_TOKEN
           ISSUE: ${{ github.event.issue.number }}  # 使用 issue 编号而不是 URL
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
