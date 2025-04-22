@@ -25,9 +25,15 @@ if len(sys.argv) < 2:
 
 with open(sys.argv[1], 'r') as file:
     issue_content = file.read()
+    
+print("-- read --")
+print(issue_content)
 
 # 根据 issue 内容决定回复
 reply = decide_reply(issue_content)
+
+print("-- reply --")
+print(reply)
 
 # 将回复内容写入文件
 with open('reply_content.txt', 'w') as file:
