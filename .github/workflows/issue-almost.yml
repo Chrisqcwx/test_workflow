@@ -19,17 +19,20 @@ jobs:
       # Step 2: Extract the issue body (content of the issue)
       - name: Extract issue content
         id: issue_content
-        run: echo "ISSUE_BODY=$(echo '${{ github.event.issue.body }}')" >> $GITHUB_ENV
+        run: |
+          echo "ISSUE_TITLE=${{ github.event.issue.title }}" >> $GITHUB_ENV
+          echo "ISSUE_BODY=${{ github.event.issue.body }}" >> $GITHUB_ENV
 
       # Step 3: Run custom script with the issue content
       - name: Run script to decide reply content
         id: decide_reply
         run: |
-          # Save the content of the issue into a file or pass it directly to a script
-          echo "${{ env.ISSUE_BODY }}" > issue_content.txt
+          # Save the issue title and content into a file for the script
+          echo "Title: ${{ env.ISSUE_TITLE }}" > issue_info.txt
+          echo "Content: ${{ env.ISSUE_BODY }}" >> issue_info.txt
           
-          # Call your custom script here (you can replace this with your own script)
-          python3 scripts/response_issue.py issue_content.txt  # Replace with your script
+          # Call your custom script here (you can replace this with your script)
+          python3 decide_reply.py issue_info.txt 
 
       # Step 4: Add comment based on the script output
       - name: Add comment to the issue
