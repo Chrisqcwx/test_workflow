@@ -14,8 +14,6 @@ jobs:
       issues: write  # 给 workflow 添加对 issues 的写权限，确保可以评论
 
     steps:
-      - name: Check GitHub CLI authentication status
-        run: gh auth status  # 确保 gh CLI 正确认证
 
       - name: Echo info
         run: echo NUMBER $ISSUE, URL $ISSUE_URL
