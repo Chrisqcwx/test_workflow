@@ -32,7 +32,7 @@ jobs:
           echo "Content: ${{ env.ISSUE_BODY }}" >> issue_info.txt
           
           # Call your custom script here (you can replace this with your script)
-          python3 decide_reply.py issue_info.txt 
+          python3 ./scripts/response_issue.py issue_info.txt 
 
       # Step 4: Add comment based on the script output
       - name: Add comment to the issue
