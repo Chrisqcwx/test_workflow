@@ -1,14 +1,31 @@
 name: Comment when opened
+
 on:
   issues:
     types:
       - opened
+      - reopened
+      - labeled
+
 jobs:
   comment:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write  # 给 workflow 添加对 issues 的写权限，确保可以评论
+
     steps:
-      - run: echo "Commented on issue html_url ${{ github.event.issue.html_url }}, number ${{ github.event.issue.number }}, on GH_TOKEN ${{ secrets.GITHUB_TOKEN }}"
-      - run: gh issue comment $ISSUE --body "Thank you for opening this issue!"
+      - name: Check GitHub CLI authentication status
+        run: gh auth status  # 确保 gh CLI 正确认证
+
+      - name: Echo info
+        run: echo NUMBER $ISSUE, URL $ISSUE_URL
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE: ${{ github.event.issue.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GH_TOKEN
+          ISSUE: ${{ github.event.issue.number }}  # 使用 issue 编号而不是 URL
+          ISSUE_URL: ${{ github.event.issue.number }}  # 使用 issue 编号而不是 URL
+
+      - name: Add comment to the issue
+        run: gh issue comment $ISSUE --body "Thank you for opening this issue!"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GH_TOKEN
+          ISSUE: ${{ github.event.issue.number }}  # 使用 issue 编号而不是 URL
