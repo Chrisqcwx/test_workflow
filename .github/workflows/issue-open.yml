@@ -17,6 +17,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4  # 确保仓库已克隆到 runner 上
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Echo info
         run: echo NUMBER $ISSUE, URL $ISSUE_URL
@@ -24,9 +26,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GH_TOKEN
           ISSUE: ${{ github.event.issue.number }}  # 使用 issue 编号而不是 URL
           ISSUE_URL: ${{ github.event.issue.number }}  # 使用 issue 编号而不是 URL
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add comment to the issue
         run: gh issue comment $ISSUE --body "Thank you for opening this issue!"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用默认的 GH_TOKEN
           ISSUE: ${{ github.event.issue.number }}  # 使用 issue 编号而不是 URL
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
