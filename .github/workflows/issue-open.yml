@@ -15,6 +15,9 @@ jobs:
 
     steps:
 
+      - name: Checkout repository
+        uses: actions/checkout@v4  # 确保仓库已克隆到 runner 上
+
       - name: Echo info
         run: echo NUMBER $ISSUE, URL $ISSUE_URL
         env:
