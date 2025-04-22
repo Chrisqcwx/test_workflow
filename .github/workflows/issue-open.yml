@@ -7,7 +7,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Commented on issue html_url ${github.event.issue.html_url}, number ${github.event.issue.number}, on GH_TOKEN ${secrets.GITHUB_TOKEN}"
+      - run: echo "Commented on issue html_url ${{ github.event.issue.html_url }}, number ${{ github.event.issue.number }}, on GH_TOKEN ${{ secrets.GITHUB_TOKEN }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
