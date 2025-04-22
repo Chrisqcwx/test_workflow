@@ -41,3 +41,4 @@ jobs:
           gh issue comment ${{ github.event.issue.number }} --body "$COMMENT"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ steps.decide_reply.outputs.reply_needed == 'true' }}
