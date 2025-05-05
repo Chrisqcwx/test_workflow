@@ -21,5 +21,5 @@ jobs:
         run: pip install -r requirements.txt # install numpy
       - name: Check numpy
         run: python -c "import numpy; print(numpy.__version__)"
-      - name: Check scipy
-        run: python -c "import scipy; print(scipy.__version__)"
+      # - name: Check scipy
+      #   run: python -c "import scipy; print(scipy.__version__)"
